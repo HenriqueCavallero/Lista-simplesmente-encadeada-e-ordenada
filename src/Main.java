@@ -8,21 +8,22 @@ public class Main {
 
         int opcao = -1;
 
-        System.out.println("=== SISTEMA DE TRIAGEM HOSPITALAR ===\n");
+        System.out.println("=== SISTEMA DE TRIAGEM HOSPITALAR ===");
 
         while (opcao != 0) {
+            System.out.println();
             System.out.println("1 - Cadastrar novo paciente");
             System.out.println("2 - Exibir fila atual");
             System.out.println("3 - Cancelar Atendimento");
             System.out.println("4 - Chamar primeiro paciente");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
-
             opcao = sc.nextInt();
             sc.nextLine();
+            System.out.println();
 
             if (opcao == 1) {
-                System.out.println("\n-- DADOS DO PACIENTE --");
+                System.out.println("-- DADOS DO PACIENTE --");
 
                 System.out.print("Nome: ");
                 String nome = sc.nextLine();
@@ -39,27 +40,27 @@ public class Main {
 
                 filaTriagem.inserirOrdenado(novoPaciente);
 
-                System.out.println("\n Paciente cadastrado e posicionado na fila! \n");
+                System.out.println("\n Paciente cadastrado e posicionado na fila!");
 
             } else if (opcao == 2) {
-                System.out.println("\n-- FILA DE ATENDIMENTO ATUAL --\n");
+                System.out.println("-- FILA DE ATENDIMENTO ATUAL --\n");
                 filaTriagem.exibirLista();
                 System.out.println();
 
             } else if (opcao == 3) {
-                System.out.println("\n-- REMOVER PACIENTE --\n");
+                System.out.println("-- REMOVER PACIENTE --\n");
                 System.out.print("Digite o nome exato do paciente que deseja remover: ");
                 String nomeParaRemover = sc.nextLine();
 
                 boolean sucesso = filaTriagem.removerPorNome(nomeParaRemover);
                 if (sucesso) {
-                    System.out.println("\n Paciente " + nomeParaRemover + " removido da fila com sucesso.\n");
+                    System.out.println("\nPaciente " + nomeParaRemover + " removido da fila com sucesso.");
                 } else {
-                    System.out.println("\n Paciente " + nomeParaRemover + " não encontrado na fila. \n");
+                    System.out.println("\nPaciente " + nomeParaRemover + " não encontrado na fila.");
                 }
 
             } else if (opcao == 4) {
-                System.out.println("\n-- CHAMADA MÉDICA -- \n");
+                System.out.println("-- CHAMADA MÉDICA -- \n");
 
                 Paciente pacienteChamado = filaTriagem.chamarProximoPaciente();
 

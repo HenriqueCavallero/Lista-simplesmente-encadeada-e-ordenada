@@ -88,13 +88,13 @@ public class ListaEncadeada {
     public void exibirLista() {
         No noAtual = cabeca;
         if (noAtual == null) {
-            System.out.println("Lista vazia");
+            System.out.print("Lista vazia");
         } else {
             while (noAtual != null) {
                 System.out.print(noAtual.paciente + "\n | \n" + " V \n");
                 noAtual = noAtual.proximo;
             }
-            System.out.println("nulo");
+            System.out.print("nulo");
         }
     }
 }
