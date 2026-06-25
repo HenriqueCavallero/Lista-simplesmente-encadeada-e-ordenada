@@ -13,6 +13,8 @@ public class Main {
         while (opcao != 0) {
             System.out.println("1 - Cadastrar novo paciente");
             System.out.println("2 - Exibir fila atual");
+            System.out.println("3 - Cancelar Atendimento");
+            System.out.println("4 - Chamar primeiro paciente");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -37,13 +39,36 @@ public class Main {
 
                 filaTriagem.inserirOrdenado(novoPaciente);
 
-                System.out.println("Paciente cadastrado e posicionado na fila!");
+                System.out.println("\n Paciente cadastrado e posicionado na fila! \n");
 
             } else if (opcao == 2) {
                 System.out.println("\n-- FILA DE ATENDIMENTO ATUAL --\n");
                 filaTriagem.exibirLista();
                 System.out.println();
 
+            } else if (opcao == 3) {
+                System.out.println("\n-- REMOVER PACIENTE --\n");
+                System.out.print("Digite o nome exato do paciente que deseja remover: ");
+                String nomeParaRemover = sc.nextLine();
+
+                boolean sucesso = filaTriagem.removerPorNome(nomeParaRemover);
+                if (sucesso) {
+                    System.out.println("\n Paciente " + nomeParaRemover + " removido da fila com sucesso.\n");
+                } else {
+                    System.out.println("\n Paciente " + nomeParaRemover + " não encontrado na fila. \n");
+                }
+
+            } else if (opcao == 4) {
+                System.out.println("\n-- CHAMADA MÉDICA -- \n");
+
+                Paciente pacienteChamado = filaTriagem.chamarProximoPaciente();
+
+                if (pacienteChamado != null) {
+                    System.out.println("ATENÇÃO: Paciente " + pacienteChamado.nome +
+                            " (" + pacienteChamado.urgencia + "), dirija-se ao consultório.");
+                } else {
+                    System.out.println("A fila de triagem está vazia no momento.");
+                }
             } else if (opcao != 0) {
                 System.out.println("Opção inválida. Tente novamente.");
             }
