@@ -2,29 +2,45 @@ public class ListaEncadeada {
     No cabeca;
     No cauda;
 
-    public void inserirOrdenado(int dado) {
-        No novoNo = new No(dado);
+    public void inserirOrdenado(Paciente paciente) {
+        No novoNo = new No(paciente);
 
-        if (cabeca == null || cabeca.dado >= novoNo.dado) {
+        if (cabeca == null) {
+            cabeca = novoNo;
+            cauda = novoNo;
+            return;
+        }
+
+        boolean urgenciaMaior = novoNo.paciente.urgencia.ordinal() < cabeca.paciente.urgencia.ordinal();
+        boolean mesmaUrgencia = novoNo.paciente.urgencia == cabeca.paciente.urgencia;
+        boolean chegouAntes = novoNo.paciente.chegada.isBefore(cabeca.paciente.chegada);
+
+        if (urgenciaMaior || (mesmaUrgencia && chegouAntes)) {
             novoNo.proximo = cabeca;
             cabeca = novoNo;
+            return;
+        }
 
-            if (cauda == null) {
-                cauda = novoNo;
-            }
-        } else {
-            No atual = cabeca;
+        No atual = cabeca;
 
-            while (atual.proximo != null && atual.proximo.dado < novoNo.dado) {
+        while (atual.proximo != null) {
+            boolean proximoEMaisUrgente = atual.proximo.paciente.urgencia.ordinal() < novoNo.paciente.urgencia.ordinal();
+
+            boolean proximoTemMesmaUrgencia = atual.proximo.paciente.urgencia == novoNo.paciente.urgencia;
+            boolean proximoChegouAntes = !novoNo.paciente.chegada.isBefore(atual.proximo.paciente.chegada);
+
+            if (proximoEMaisUrgente || (proximoTemMesmaUrgencia && proximoChegouAntes)) {
                 atual = atual.proximo;
+            } else {
+                break;
             }
+        }
 
-            novoNo.proximo = atual.proximo;
-            atual.proximo = novoNo;
+        novoNo.proximo = atual.proximo;
+        atual.proximo = novoNo;
 
-            if (novoNo.proximo == null) {
-                cauda = novoNo;
-            }
+        if (novoNo.proximo == null) {
+            cauda = novoNo;
         }
     }
 
@@ -34,7 +50,7 @@ public class ListaEncadeada {
             System.out.println("Lista vazia");
         } else {
             while (noAtual != null) {
-                System.out.print(noAtual.dado + " -> ");
+                System.out.print(noAtual.paciente + "\n | \n" + " V \n");
                 noAtual = noAtual.proximo;
             }
             System.out.println("nulo");

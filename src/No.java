@@ -1,9 +1,9 @@
 public class No {
-    int dado;
+    Paciente paciente;
     No proximo;
 
-    public No(int dado) {
-        this.dado = dado;
+    public No(Paciente paciente) {
+        this.paciente = paciente;
         proximo = null;
     }
 }
