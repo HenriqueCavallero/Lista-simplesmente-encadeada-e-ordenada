@@ -23,7 +23,6 @@ public class ListaEncadeada {
 
         while (atual.proximo != null) {
             boolean proximoEMaisUrgente = atual.proximo.paciente.urgencia.ordinal() < novoNo.paciente.urgencia.ordinal();
-
             boolean proximoTemMesmaUrgencia = atual.proximo.paciente.urgencia == novoNo.paciente.urgencia;
             boolean proximoChegouAntes = !novoNo.paciente.chegada.isBefore(atual.proximo.paciente.chegada);
 
@@ -99,4 +98,3 @@ public class ListaEncadeada {
         }
     }
 }
-
